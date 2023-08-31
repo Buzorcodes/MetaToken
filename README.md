@@ -38,7 +38,7 @@ Once the contract is deployed, you can interact with it using Ethereum wallets o
 
 The contract owner can mint new tokens by calling the `mintToken` function. Provide the recipient's address and the amount of tokens to mint. For example:
 
-solidityCopy code
+
 
 `function mintToken(address to, uint256 amount) public onlyOwner {
     _mint(to, amount);
@@ -48,7 +48,7 @@ solidityCopy code
 
 Users can burn (destroy) their own tokens by calling the `burnToken` function. Specify the amount of tokens to burn. For example:
 
-solidityCopy code
+
 
 `function burnToken(uint256 amount) public {
     _burn(msg.sender, amount);
@@ -58,7 +58,7 @@ solidityCopy code
 
 Users can transfer tokens to other addresses using the `transferToken` function. Specify the recipient's address and the amount to transfer. For example:
 
-solidityCopy code
+
 
 `function transferToken(address to, uint256 amount) public returns (bool) {
     _transfer(msg.sender, to, amount);
