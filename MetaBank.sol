@@ -6,17 +6,14 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Metacrafters is ERC20 {
     address public owner;
 
-    constructor(uint256 initialSupply) ERC20("Metacrafters Token", "MTC") {
-        _mint(msg.sender, initialSupply);
+    constructor() ERC20("Metacrafters Token", "MTC") {
+       
         owner = msg.sender;
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only Owner");
-        _;
-    }
 
-    function mintToken(address to, uint256 amount) public onlyOwner {
+    function mintToken(address to, uint256 amount) public  {
+        require(msg.sender == owner, "Only Owner");
         _mint(to, amount);
     }
 
