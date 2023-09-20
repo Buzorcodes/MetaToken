@@ -1,19 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Metacrafters is ERC20 {
-    address public owner;
+contract Metacrafters is ERC20, Ownable {
+    constructor() ERC20("Metacrafters Token", "MTC") {}
 
-    constructor() ERC20("Metacrafters Token", "MTC") {
-       
-        owner = msg.sender;
-    }
-
-
-    function mintToken(address to, uint256 amount) public  {
-        require(msg.sender == owner, "Only Owner");
+    function mintToken(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
 
@@ -21,8 +16,11 @@ contract Metacrafters is ERC20 {
         _burn(msg.sender, amount);
     }
 
-    function transferToken(address to, uint256 amount) public returns (bool) {
-        _transfer(msg.sender, to, amount);
+    function transfer(address recipient, uint256 amount) public override returns (bool) {
+        _transfer(msg.sender, recipient, amount);
         return true;
     }
+
+ 
+   
 }
